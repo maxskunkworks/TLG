@@ -36,55 +36,21 @@
       "metadata": {
         "description": "Choose 'No' to deploy no client VM, or 'Yes' if you want to deploy a client VM from a custom generalized VHD that you have uploaded to an accessible storage account."
       },
-      "defaultValue": "No"
+      "defaultValue": "Yes"
     },
-    "clientVhdStorageAccount": {
+    "clientVhdUri": {
       "type": "string",
       "metadata": {
-        "description": "The name of the storage account containing the client VHD. Leave blank if you are not deploying a client VM."
-      },
-      "defaultValue": ""
-    },
-    "clientVhdStorageAccountSasToken": {
-      "type": "string",
-      "metadata": {
-        "description": "The SAS token for the storage account containing the client VHD. Leave blank if you are not deploying a client VM."
-      },
-      "defaultValue": ""
-    },
-    "clientVhdName": {
-      "type": "string",
-      "metadata": {
-        "description": "The name of the client VHD, i.e. 'windows10.vhd'. Leave blank if you are not deploying a client VM."
+        "description": "The URI of the storage account containing the client VHD. Leave blank if you are not deploying a client VM."
       },
       "defaultValue": ""
     },
     "vmSize": {
       "type": "string",
-      "allowedValues": [ 
-        "Standard_D1_v2",
-        "Standard_DS1_v2",
-        "Standard_D2_v2",
-        "Standard_DS2_v2",
-        "Standard_D3_v2",
-        "Standard_DS3_v2",
-        "Standard_D4_v2",
-        "Standard_DS4_v2" ],
       "metadata": {
         "description": "Select a VM size for all server VMs in your deployment. If a client VM is deployed, it will use Standard_D2_v2."
       },
-      "defaultValue": "Standard_D2_v2"
-    },
-    "storageAccountType": {
-      "type": "string",
-      "allowedValues": [
-        "Standard_LRS",
-        "Standard_GRS"
-      ],
-      "metadata": {
-        "description": "The storage account type."
-      },
-      "defaultValue": "Standard_LRS"
+      "defaultValue": "Standard_DS2_v2"
     },
     "dnsLabelPrefix": {
       "type": "string",
@@ -110,20 +76,15 @@
 
   "variables": {
 
-    "baseVnet": "[concat(parameters('configName'),'-VNET')]",
-    "VnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('baseVnet'))]",
     "shortDomainName": "[first(split(parameters('domainName'),'.'))]",
     "domainUserName": "[concat(variables('shortDomainName'),'\\',parameters('adminUsername'))]",
-
-    "storage": {
-      "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
-      "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
-      "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]"
-    },
+    "assetLocation": "[concat(parameters('_artifactsLocation'),'/DSC')]",
+    "templates": "[concat(parameters('_artifactsLocation'),'/nested')]",
+    "storageAccountName": "[concat(uniqueString(resourceGroup().id),'storage')]",
 
     "network": {
-      "vnetName": "[variables('baseVnet')]",
-      "subnetRef": "[concat(variables('VnetID'),'/subnets/subnet-01')]",
+      "vnetName": "[concat(parameters('configName'),'-VNET')]",
+      "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
       "subnet": "10.0.0.0/24",
       "nsgName": "[concat(parameters('configName'),'-NSG')]"
     },
@@ -141,6 +102,17 @@
       "cliVmName": "CLIENT1",
       "clientNicIP": "10.0.0.12",
       "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
+    },
+
+    "SharedVmConfig": {
+      "location": "[resourceGroup().location]",
+      "vmSize": "[parameters('vmSize')]",
+      "domainUsername": "[variables('domainUsername')]",
+      "adminUsername": "[parameters('adminUsername')]",
+      "adminPassword": "[parameters('adminPassword')]",
+      "storageAccountNamePrefix": "[variables('storageAccountName')]",
+      "sasToken": "[parameters('_artifactsLocationSasToken')]",
+      "domainName": "[parameters('domainName')]"
     }
   },
 
@@ -206,28 +178,17 @@
     },
     {
       "type": "Microsoft.Storage/storageAccounts",
-      "name": "[concat(variables('storage').storageAccountName,'vhds')]",
-      "apiVersion": "2016-01-01",
+      "name": "[variables('storageAccountName')]",
+      "apiVersion": "2017-06-01",
       "location": "[resourceGroup().location]",
       "kind": "Storage",
       "comments": "This storage account contains VHDs for VMs in the deployment.",
       "sku": {
-        "name": "[parameters('storageAccountType')]"
+        "name": "Standard_LRS"
       }
     },
     {
-      "type": "Microsoft.Storage/storageAccounts",
-      "name": "[concat(variables('storage').storageAccountName,'diag')]",
-      "apiVersion": "2016-01-01",
-      "location": "[resourceGroup().location]",
-      "kind": "Storage",
-      "comments": "This storage account contains diagnostics data.",
-      "sku": {
-        "name": "[parameters('storageAccountType')]"
-      }
-    },
-    {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').adPublicIpName]",
       "location": "[resourceGroup().location]",
@@ -240,7 +201,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').appPublicIpName]",
       "location": "[resourceGroup().location]",
@@ -253,7 +214,7 @@
       }
     },
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-06-01",
       "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').cliPublicIpName]",
@@ -371,42 +332,24 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(variables('storage').templates,'/addc.json',parameters('_artifactsLocationSasToken'))]",
+          "uri": "[concat(variables('templates'),'/addc.json',parameters('_artifactsLocationSasToken'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
+          "SharedVmConfig": { 
+            "value": "[variables('SharedVmConfig')]" 
           },
-          "adVMName": {
+          "vmName": {
             "value": "[variables('VMs').adVmName]"
           },
-          "adVMSize": {
-            "value": "[parameters('vmSize')]"
-          },
-          "adminUsername": {
-            "value": "[parameters('adminUsername')]"
-          },
-          "adminPassword": {
-            "value": "[parameters('adminPassword')]"
-          },
-          "storageAccountNamePrefix": {
-            "value": "[variables('storage').storageAccountName]"
-          },
-          "adNicName": {
+          "nicName": {
             "value": "[concat(parameters('configName'),'-AD_NIC')]"
           },
-          "adModulesURL": {
-            "value": "[concat(variables('storage').assetLocation,'/CreateADPDC.ps1.zip')]"
+          "modulesURL": {
+            "value": "[concat(variables('assetLocation'),'/CreateADPDC.ps1.zip')]"
           },
-          "adConfigurationFunction": {
+          "configurationFunction": {
             "value": "[variables('VMs').adConfigurationFunction]"
-          },
-          "SasToken": {
-            "value": "[parameters('_artifactsLocationSasToken')]"
-          },
-          "domainName": {
-            "value": "[parameters('domainName')]"
           }
         }
       }
@@ -423,36 +366,18 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(variables('storage').templates,'/app.json',parameters('_artifactsLocationSasToken'))]",
+          "uri": "[concat(variables('templates'),'/app.json',parameters('_artifactsLocationSasToken'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
+          "SharedVmConfig": { 
+            "value": "[variables('SharedVmConfig')]" 
           },
-          "appVMName": {
+          "vmName": {
             "value": "[variables('VMs').appVmName]"
           },
-          "appVMSize": {
-            "value": "[parameters('vmSize')]"
-          },
-          "domainUserName": {
-            "value": "[variables('domainUserName')]"
-          },
-          "adminUsername": {
-            "value": "[parameters('adminUsername')]"
-          },
-          "adminPassword": {
-            "value": "[parameters('adminPassword')]"
-          },
-          "storageAccountNamePrefix": {
-            "value": "[variables('storage').storageAccountName]"
-          },
-          "appNicName": {
+          "nicName": {
             "value": "[concat(parameters('configName'),'-APP_NIC')]"
-          },
-          "domainName": {
-            "value": "[parameters('domainName')]"
           }
         }
       }
@@ -470,45 +395,21 @@
       "properties": {
         "mode": "Incremental",
         "templateLink": {
-          "uri": "[concat(variables('storage').templates,'/client.json',parameters('_artifactsLocationSasToken'))]",
+          "uri": "[concat(variables('templates'),'/client.json',parameters('_artifactsLocationSasToken'))]",
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "location": {
-            "value": "[resourceGroup().location]"
+          "SharedVmConfig": { 
+            "value": "[variables('SharedVmConfig')]" 
           },
-          "cliVMName": {
+          "vmName": {
             "value": "[variables('VMs').cliVmName]"
           },
-          "cliVMSize": {
-            "value": "[parameters('vmSize')]"
-          },
-          "domainUserName": {
-            "value": "[variables('domainUserName')]"
-          },
-          "adminUsername": {
-            "value": "[parameters('adminUsername')]"
-          },
-          "adminPassword": {
-            "value": "[parameters('adminPassword')]"
-          },
-          "storageAccountNamePrefix": {
-            "value": "[variables('storage').storageAccountName]"
-          },
-          "cliNicName": {
+          "nicName": {
             "value": "[concat(parameters('configName'),'-CLI_NIC')]"
           },
-          "domainName": {
-            "value": "[parameters('domainName')]"
-          },
-          "vhdStorageAccount": {
-            "value": "[parameters('clientVhdStorageAccount')]"
-          },
-          "vhdStorageAccountSasToken": {
-            "value": "[parameters('clientVhdStorageAccountSasToken')]"
-          },
-          "vhdName": {
-            "value": "[parameters('clientVhdName')]"
+          "vhdUri": {
+            "value": "[parameters('clientVhdUri')]"
           }
         }
       }

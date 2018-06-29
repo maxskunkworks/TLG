@@ -9,31 +9,22 @@
       "value": "corp.contoso.com"
     },
     "adminUsername": {
-      "value": "GEN-UNIQUE"
+      "value": "GEN-UNIQUE-8"
     },
     "adminPassword": {
       "value": "GEN-PASSWORD"
     },
     "vmSize": {
-      "value": "Standard_D2_v2"
-    },
-    "storageAccountType": {
-      "value": "Standard_LRS"
+      "value": "Standard_DS2_v2"
     },
     "dnsLabelPrefix": {
       "value": "GEN-UNIQUE-13"
     },
     "deployClientVm": {
-      "value": "No"
+      "value": "Yes"
     },
-    "clientVhdStorageAccount": {
-      "value": "GEN-UNIQUE"
-    },
-    "clientVhdStorageAccountSasToken": {
-      "value": "GEN-UNIQUE"
-    },
-    "clientVhdName": {
-      "value": "GEN-UNIQUE"
+    "clientVhdUri": {
+      "value": "GEN-GENERALIZED-WINVHD-URI"
     }
   }
 }

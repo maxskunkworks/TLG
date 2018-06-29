@@ -2,54 +2,37 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "location": {
+    "SharedVmConfig": {
+      "type": "object"
+    },
+    "vmName": {
       "type": "string"
     },
-    "adVMName": {
+    "nicName": {
       "type": "string"
     },
-    "adVMSize": {
+    "modulesURL": {
       "type": "string"
     },
-    "adminUsername": {
-      "type": "string"
-    },
-    "adminPassword": {
-      "type": "securestring"
-    },
-    "storageAccountNamePrefix": {
-      "type": "string"
-    },
-    "adNicName": {
-      "type": "string"
-    },
-    "adModulesURL": {
-      "type": "string"
-    },
-    "adConfigurationFunction": {
-      "type": "string"
-    },
-    "SasToken": {
-      "type": "string"
-    },
-    "domainName": {
+    "configurationFunction": {
       "type": "string"
     }
   },
+  "variables": {},
   "resources": [
     {
-      "apiVersion": "2015-06-15",
+      "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
-      "name": "[parameters('adVMName')]",
-      "location": "[parameters('location')]",
+      "name": "[parameters('vmName')]",
+      "location": "[parameters('SharedVmConfig').location]",
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[parameters('adVMSize')]"
+          "vmSize": "[parameters('SharedVmConfig').vmSize]"
         },
         "osProfile": {
-          "computerName": "[parameters('adVMName')]",
-          "adminUsername": "[parameters('adminUsername')]",
-          "adminPassword": "[parameters('adminPassword')]"
+          "computerName": "[parameters('vmName')]",
+          "adminUsername": "[parameters('SharedVmConfig').adminUsername]",
+          "adminPassword": "[parameters('SharedVmConfig').adminPassword]"
         },
         "storageProfile": {
           "imageReference": {
@@ -59,22 +42,12 @@
             "version": "latest"
           },
           "osDisk": {
-            "name": "[concat(parameters('adVMName'),'-osdisk')]",
-            "vhd": {
-              "uri": "[concat('http://',parameters('storageAccountNamePrefix'),'vhds.blob.core.windows.net/vhds/',parameters('adVMName'),'-osdisk.vhd')]"
-            },
-            "caching": "ReadWrite",
             "createOption": "FromImage"
           },
           "dataDisks": [
             {
-              "vhd": {
-                "uri": "[concat('http://',parameters('storageAccountNamePrefix'),'vhds.blob.core.windows.net/vhds/',parameters('adVMName'),'-data-disk1.vhd')]"
-              },
-              "name": "[concat(parameters('adVMName'),'-data-disk1')]",
-              "caching": "None",
               "createOption": "Empty",
-              "diskSizeGB": "1000",
+              "diskSizeGB": 1023,
               "lun": 0
             }
           ]
@@ -82,14 +55,14 @@
         "networkProfile": {
           "networkInterfaces": [
             {
-              "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('adNicName'))]"
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',parameters('nicName'))]"
             }
           ]
         },
         "diagnosticsProfile": {
           "bootDiagnostics": {
-            "enabled": "true",
-            "storageUri": "[concat('http://',parameters('storageAccountNamePrefix'),'diag.blob.core.windows.net')]"
+            "enabled": true,
+            "storageUri": "[reference(concat('Microsoft.Storage/storageAccounts/',parameters('SharedVmConfig').storageAccountNamePrefix),'2017-06-01').primaryEndpoints.blob]"
           }
         }
       },
@@ -97,11 +70,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('adVMName'),'/InstallDomainController')]",
-      "apiVersion": "2015-06-15",
-      "location": "[parameters('location')]",
+      "name": "[concat(parameters('vmName'),'/InstallDomainController')]",
+      "apiVersion": "2017-03-30",
+      "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[resourceId('Microsoft.Compute/virtualMachines', parameters('adVMName'))]"
+        "[parameters('vmName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Powershell",
@@ -110,19 +83,19 @@
         "autoUpgradeMinorVersion": true,
         "protectedSettings": {
           "Items": {
-            "AdminPassword": "[parameters('adminPassword')]",
-            "configurationUrlSasToken": "[parameters('SasToken')]"
+            "AdminPassword": "[parameters('SharedVmConfig').adminPassword]",
+            "configurationUrlSasToken": "[parameters('SharedVmConfig').SasToken]"
           }
         },
         "settings": {
-          "modulesUrl": "[parameters('adModulesURL')]",
-          "sasToken": "[parameters('SasToken')]",
+          "modulesUrl": "[parameters('modulesURL')]",
+          "sasToken": "[parameters('SharedVmConfig').SasToken]",
           "wmfVersion": "latest",
-          "configurationFunction": "[parameters('adConfigurationFunction')]",
+          "configurationFunction": "[parameters('configurationFunction')]",
           "Properties": {
-            "DomainName": "[parameters('domainName')]",
+            "DomainName": "[parameters('SharedVmConfig').domainName]",
             "AdminCreds": {
-              "UserName": "[parameters('adminUserName')]",
+              "UserName": "[parameters('SharedVmConfig').adminUserName]",
               "Password": "PrivateSettingsRef:AdminPassword"
             }
           }
@@ -131,12 +104,12 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('adVMName'),'/BGInfo')]",
-      "apiVersion": "2015-06-15",
+      "name": "[concat(parameters('vmName'),'/BGInfo')]",
+      "apiVersion": "2017-03-30",
       "scale": null,
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('adVMName')]"
+        "[parameters('vmName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -150,11 +123,11 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('adVMName'),'/Antimalware')]",
-      "apiVersion": "2015-05-01-preview",
-      "location": "[resourceGroup().location]",
+      "name": "[concat(parameters('vmName'),'/Antimalware')]",
+      "apiVersion": "2017-03-30",
+      "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', parameters('adVMName'))]"
+        "[parameters('vmName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
