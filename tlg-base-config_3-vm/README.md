@@ -31,7 +31,7 @@ The following resources are deployed as part of the solution:
 + **ADDC VM**: Windows Server 2012 R2 or 2016 VM configured as a domain controller and DNS with static private IP address
 + **App Server VM**: Windows Server 2012 R2 or 2016 VM joined to the domain
 + **Client VM**: Windows 10 client joined to the domain
-+ **Storage account**: Disgnostics storage account. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
++ **Storage account**: Diagnostics storage account, and client VM storage account if indicated. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
 + **NSG**: Network security group configured to allow inbound RDP on 3389
 + **Virtual network**: Virtual network for internal traffic, configured with custom DNS pointing to the ADDC's private IP address and tenant subnet 10.0.0.0/8
 + **Network interfaces**: 1 NIC per VM
