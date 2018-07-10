@@ -38,7 +38,7 @@
           "imageReference": {
             "publisher": "MicrosoftWindowsServer",
             "offer": "WindowsServer",
-            "sku": "2012-R2-Datacenter",
+            "sku": "[parameters('SharedVmConfig').serverOS]",
             "version": "latest"
           },
           "osDisk": {
@@ -47,7 +47,7 @@
           "dataDisks": [
             {
               "createOption": "Empty",
-              "diskSizeGB": 1023,
+              "diskSizeGB": 20,
               "lun": 0
             }
           ]

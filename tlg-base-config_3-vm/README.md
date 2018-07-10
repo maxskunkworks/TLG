@@ -10,8 +10,7 @@
 This template deploys the **TLG (Test Lab Guide) 3 VM Base Configuration**, a Test Lab Guide (TLG) configuration that represents a simplified intranet connected 
 to the Internet. This base configuration is the starting point for additional TLGs that can be found [here](http://aka.ms/catlgs).
 
-The **TLG (Test Lab Guide) 3 VM Base Configuration** provisions a Windows Server 2012 R2 Active Directory domain controller using the specified domain name, 
-an application server running Windows Server 2012 R2, and optionally a client VM running Windows 10. 
+The **TLG (Test Lab Guide) 3 VM Base Configuration** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and optionally a client VM running Windows 10. 
 
 **Note:** If you choose to deploy a client VM, you must upload a generalized Windows 10 VHD to an Azure storage account and provide the account name in the _clientVhdUri_ parameter. Note that SAS tokens are not supported, and the blob container must be configured for public read access.
 Use of a custom client image is required because the Windows 10 gallery image is only available in eligible subscriptions (Visual Studio or MSDN). The path to the VHD should resemble the following example:
@@ -29,12 +28,12 @@ Thanks to both Simon Davies and Willem Kasdorp, from whom I borrowed various DSC
 
 The following resources are deployed as part of the solution:
 
-+ **ADDC VM**: Windows Server 2012 R2 VM configured as a domain controller and DNS with static private IP address
-+ **App Server VM**: Windows Server 2012 R2 VM joined to the domain
++ **ADDC VM**: Windows Server 2012 R2 or 2016 VM configured as a domain controller and DNS with static private IP address
++ **App Server VM**: Windows Server 2012 R2 or 2016 VM joined to the domain
 + **Client VM**: Windows 10 client joined to the domain
 + **Storage account**: Disgnostics storage account. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
 + **NSG**: Network security group configured to allow inbound RDP on 3389
-+ **Virtual network**: Virtual network for internal traffic, configured with custom DNS pointing to the ADDC's private IP address
++ **Virtual network**: Virtual network for internal traffic, configured with custom DNS pointing to the ADDC's private IP address and tenant subnet 10.0.0.0/8
 + **Network interfaces**: 1 NIC per VM
 + **Public IP addresses**: 1 public IP per VM
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain.

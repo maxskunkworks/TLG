@@ -16,6 +16,15 @@
       },
       "defaultValue": "corp.contoso.com"
     },
+    "serverOS": {
+      "type": "string",
+      "allowedValues": [
+        "2012-R2-Datacenter", "2016-Datacenter"
+      ],
+      "metadata": {
+        "description": "The OS of application servers in your deployment."
+      }
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -85,7 +94,7 @@
     "network": {
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
-      "subnet": "10.0.0.0/24",
+      "subnet": "10.0.0.0/8",
       "nsgName": "[concat(parameters('configName'),'-NSG')]"
     },
 
@@ -107,6 +116,7 @@
     "SharedVmConfig": {
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
+      "serverOS": "[parameters('serverOS')]",
       "domainUsername": "[variables('domainUsername')]",
       "adminUsername": "[parameters('adminUsername')]",
       "adminPassword": "[parameters('adminPassword')]",
