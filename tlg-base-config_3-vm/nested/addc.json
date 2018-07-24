@@ -15,7 +15,7 @@
       "type": "string"
     },
     "configurationFunction": {
-      "type": "string"
+      "type": "object"
     }
   },
   "variables": {},
@@ -88,10 +88,10 @@
           }
         },
         "settings": {
-          "modulesUrl": "[parameters('modulesURL')]",
+          "modulesUrl": "[concat(parameters('modulesURL'),'/CreateADPDC.ps1.zip')]",
           "sasToken": "[parameters('SharedVmConfig').SasToken]",
           "wmfVersion": "latest",
-          "configurationFunction": "[parameters('configurationFunction')]",
+          "configurationFunction": "[parameters('configurationFunction').CreateADPDC]",
           "Properties": {
             "DomainName": "[parameters('SharedVmConfig').domainName]",
             "AdminCreds": {

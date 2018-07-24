@@ -23,7 +23,8 @@
       ],
       "metadata": {
         "description": "The OS of application servers in your deployment."
-      }
+      },
+      "defaultValue": "2016-Datacenter"
     },
     "adminUsername": {
       "type": "string",
@@ -100,11 +101,16 @@
 
     "VMs": {
       "adVmName": "DC1",
-      "adConfigurationFunction": "CreateADPDC.ps1\\CreateADPDC",
+      "adConfigurationFunction": {
+        "CreateADPDC": "CreateADPDC.ps1\\CreateADPDC"
+      },
       "adNicIP": "10.0.0.10",
       "adPublicIpName": "[concat(parameters('configName'),'-AD_IP')]",
 
       "appVmName": "APP1",
+      "appConfigurationFunction": {
+        "AppConfig": "AppConfig.ps1\\AppConfig"
+      },
       "appNicIP": "10.0.0.11",
       "appPublicIpName": "[concat(parameters('configName'),'-APP_IP')]",
 
@@ -356,7 +362,7 @@
             "value": "[concat(parameters('configName'),'-AD_NIC')]"
           },
           "modulesURL": {
-            "value": "[concat(variables('assetLocation'),'/CreateADPDC.ps1.zip')]"
+            "value": "[variables('assetLocation')]"
           },
           "configurationFunction": {
             "value": "[variables('VMs').adConfigurationFunction]"
@@ -388,6 +394,12 @@
           },
           "nicName": {
             "value": "[concat(parameters('configName'),'-APP_NIC')]"
+          },
+          "modulesURL": {
+            "value": "[variables('assetLocation')]"
+          },
+          "configurationFunction": {
+            "value": "[variables('VMs').appConfigurationFunction]"
           }
         }
       }
