@@ -58,7 +58,7 @@
     "vmSize": {
       "type": "string",
       "metadata": {
-        "description": "Select a VM size for all server VMs in your deployment. If a client VM is deployed, it will use Standard_D2_v2."
+        "description": "Select a VM size for all VMs in your deployment."
       },
       "defaultValue": "Standard_DS2_v2"
     },
