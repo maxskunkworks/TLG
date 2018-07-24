@@ -58,8 +58,12 @@ The following resources are deployed as part of the solution:
 * The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
 the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several minutes to the overall deployment time.
 * The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs.
-* The default VM size for all VMs in the deployment is Standard_D2_v2.
+* The default VM size for all VMs in the deployment is Standard_D2_v2. See the **Known Issues** section below for information about possible issues related to client VM size.
 * Deployment outputs include public IP address and FQDN for each VM.
+
+## Known issues
+
+* When the specified VM size is smaller than DS4_v2, the client VM deployment may take longer than expected, and then may appear to fail. The client VMs and extensions may or may not deploy successfully. This is due to an ongoing Azure client deployment bug, and only happens when the client VM size is smaller than DS4_v2.
 
 `Tags: TLG, Test Lab Guide, Base Configuration`
 ___
