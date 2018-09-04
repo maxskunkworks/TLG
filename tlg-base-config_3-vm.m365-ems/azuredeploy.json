@@ -54,14 +54,14 @@
     "_artifactsLocation": {
       "type": "string",
       "metadata": {
-        "description": "Auto-generated container in staging storage account to receive post-build staging folder upload."
+        "description": "GitHub location of template files."
       },
-      "defaultValue": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm"
+      "defaultValue": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
       "metadata": {
-        "description": "Auto-generated token to access _artifactsLocation."
+        "description": "SAS token to access _artifactsLocation if necessary."
       },
       "defaultValue": ""
     }
