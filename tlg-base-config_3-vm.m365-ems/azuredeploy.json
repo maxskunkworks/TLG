@@ -12,9 +12,9 @@
     "domainName": {
       "type": "string",
       "metadata": {
-        "description": "The FQDN of the new AD domain."
+        "description": "The FQDN of the new AD domain. For this TLG, use testlab.<your public domain>."
       },
-      "defaultValue": "corp.contoso.com"
+      "defaultValue": "testlab.corp.contoso.com"
     },
     "serverOS": {
       "type": "string",
