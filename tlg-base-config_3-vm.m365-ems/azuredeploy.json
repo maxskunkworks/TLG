@@ -38,23 +38,6 @@
         "description": "The administrator account password."
       }
     },
-    "deployClientVm": {
-      "type": "string",
-      "allowedValues": [
-        "No", "Yes"
-      ],
-      "metadata": {
-        "description": "Choose 'No' to deploy no client VM, or 'Yes' if you want to deploy a client VM from a custom generalized VHD that you have uploaded to an accessible storage account."
-      },
-      "defaultValue": "Yes"
-    },
-    "clientVhdUri": {
-      "type": "string",
-      "metadata": {
-        "description": "The URI of the storage account containing the client VHD. Leave blank if you are not deploying a client VM."
-      },
-      "defaultValue": ""
-    },
     "vmSize": {
       "type": "string",
       "metadata": {
@@ -231,7 +214,6 @@
     },
     {
       "apiVersion": "2017-06-01",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('VMs').cliPublicIpName]",
       "location": "[resourceGroup().location]",
@@ -305,7 +287,6 @@
     },
     {
       "name": "[concat(parameters('configName'),'-CLI_NIC')]",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Network/networkInterfaces",
       "location": "[resourceGroup().location]",
       "dependsOn": [
@@ -406,7 +387,6 @@
     },
     {
       "name": "Client",
-      "condition": "[equals(parameters('deployClientVm'),'Yes')]",
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2015-01-01",
       "comments": "This is the deployment resource for the client VM.",
@@ -429,9 +409,6 @@
           },
           "nicName": {
             "value": "[concat(parameters('configName'),'-CLI_NIC')]"
-          },
-          "vhdUri": {
-            "value": "[parameters('clientVhdUri')]"
           }
         }
       }
@@ -454,6 +431,14 @@
     "AppFqdn": {
       "type": "string",
       "value": "[reference(variables('VMs').appPublicIpName).dnsSettings.fqdn]"
+    },
+    "ClientPublicIpAddress": {
+      "type": "string",
+      "value": "[reference(variables('VMs').cliPublicIpName).ipAddress]"
+    },
+    "ClientFqdn": {
+      "type": "string",
+      "value": "[reference(variables('VMs').cliPublicIpName).dnsSettings.fqdn]"
     }
   }
 }
