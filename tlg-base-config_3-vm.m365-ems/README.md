@@ -21,7 +21,7 @@ The **Microsoft 365 + EMS** template provisions a Windows Server 2012 R2 or 2016
 
 You can deploy this template in one of two ways:
 
-+ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
++ Click the **Deploy to Azure** button to open the deployment UI in the Azure portal
 + Execute the PowerShell script at https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems/scripts/Deploy-TLG.ps1 on your local computer.
 
 After you deploy the template, you will need to complete the steps in [Phase 4](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise#phase-4-create-your-office-365-e5-and-ems-e5-subscriptions) in the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide article to complete the configuration.
@@ -51,7 +51,7 @@ The following resources are deployed as part of the solution:
 + The default VM size for all VMs in the deployment is Standard_D2_v2.
 + Deployment outputs include public IP address and FQDN for each VM.
 
-`Tags: TLG, Test Lab Guide, Base Configuration`
+`Tags: TLG, Test Lab Guide, Base Configuration, M365, Microsoft 365`
 ___
 Developed by the **MAX Skunkworks Lab**  
 Author: Kelley Vice (kvice@microsoft.com)  
