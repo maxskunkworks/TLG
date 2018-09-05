@@ -2,7 +2,7 @@
 
 **Time to deploy**: Approx. 32 minutes
 
-Last updated _9/4/2018_
+Last updated _9/5/2018_
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmaxskunkworks%2Ftlg%2Fmaster%2Ftlg-base-config_3-vm.m365-ems%2Fazuredeploy.json" target="_blank">
 <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -11,9 +11,9 @@ Last updated _9/4/2018_
 <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template deploys the **TLG (Test Lab Guide) - Microsoft 365 + EMS**, a Test Lab Guide (TLG) configuration that represents a simplified intranet connected to the Internet and integrated with Microsoft 365 with EMS. This configuration is the starting point for additional TLGs that can be found [here](http://aka.ms/catlgs).
+This template deploys the **Microsoft 365 + EMS** Test Lab Guide (TLG) configuration that represents a a simplified environment for Microsoft 365 Enterprise integrated with Office 365 E5 and EMS E5 trial or permanent subscriptions. This template corresponds to the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide. 
 
-The **TLG (Test Lab Guide) - Microsoft 365 + EMS** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and a client VM running Windows Server 2016.
+The **Microsoft 365 + EMS** template provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and a client VM running Windows Server 2016. You can use the resulting environment to test the features and functionality of Microsoft 365 Enterprise, with additional Microsoft 365 Enterprise [Test Lab Guides](http://aka.ms/catlgs) or on your own.
 
 ![alt text](images/tlg-m365-phase4.png "Diagram of the base config deployment")
 
@@ -23,6 +23,8 @@ You can deploy this template in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
 + Execute the PowerShell script at https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems/scripts/Deploy-TLG.ps1 on your local computer.
+
+After you deploy the template, you will need to complete the steps in [Phase 4](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise#phase-4-create-your-office-365-e5-and-ems-e5-subscriptions) in the linked article to complete the configuration.
 
 ## Solution overview and deployed resources
 
