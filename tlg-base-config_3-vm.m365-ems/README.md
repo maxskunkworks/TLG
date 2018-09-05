@@ -15,7 +15,7 @@ This template deploys the **TLG (Test Lab Guide) - Microsoft 365 + EMS**, a Test
 
 The **TLG (Test Lab Guide) - Microsoft 365 + EMS** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and a client VM running Windows Server 2016.
 
-![alt text](images/tlg-base-config_3-vm.png "Diagram of the base config deployment")
+![alt text](images/tlg-m365-phase4.png "Diagram of the base config deployment")
 
 ## Usage
 
