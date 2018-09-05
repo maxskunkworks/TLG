@@ -11,7 +11,7 @@ Last updated _9/5/2018_
 <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template deploys the **Microsoft 365 + EMS** Test Lab Guide (TLG) configuration that represents a a simplified environment for Microsoft 365 Enterprise integrated with Office 365 E5 and EMS E5 trial or permanent subscriptions. This template corresponds to the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide. 
+This template deploys the **Microsoft 365 + EMS** Test Lab Guide (TLG) configuration that represents a a simplified environment for Microsoft 365 Enterprise integrated with Office 365 E5 and EMS E5 trial or permanent subscriptions. This template corresponds to the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide.
 
 The **Microsoft 365 + EMS** template provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and a client VM running Windows Server 2016. You can use the resulting environment to test the features and functionality of Microsoft 365 Enterprise, with additional Microsoft 365 Enterprise [Test Lab Guides](http://aka.ms/catlgs) or on your own.
 
