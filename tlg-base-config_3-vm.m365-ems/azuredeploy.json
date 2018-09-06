@@ -66,7 +66,7 @@
       "metadata": {
         "description": "GitHub location of template files."
       },
-      "defaultValue": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems"
+      "defaultValue": "https://raw.githubusercontent.com/maxskunkworks/tlg/o365-ems-ignite/tlg-base-config_3-vm.m365-ems"
     },
     "_artifactsLocationSasToken": {
       "type": "securestring",
