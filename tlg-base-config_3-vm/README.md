@@ -32,6 +32,11 @@ You can deploy this template in one of two ways:
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
 + Execute the PowerShell script at https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm/scripts/Deploy-TLG.ps1 on your local computer.
 
+Prior to deploying the template, have the following information ready:
+
++ The public DNS domain name of your test environment (testlab.\<_your public domain_\>). Enter this name in the __Domain Name__ field after clicking the __Deploy to Azure__ button or for the value of the __domainName__ variable in the template parameters file.
++ A DNS label prefix for the URLs of the public IP addresses of your virtual machines. These URLs are generated for each virtual machine in your deployment in the format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file.
+
 ## Solution overview and deployed resources
 
 The following resources are deployed as part of the solution:
