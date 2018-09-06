@@ -2,7 +2,7 @@
 
 The TLG repository contains ARM templates used to deploy Test Lab Guide (TLG) environments. You can learn more about TLGs [here](http://aka.ms/catlgs).
 
-ARM (Azure Resource Manager) templates are pre-configured prescriptive deployment packages that enable you to provision complex test/pilot environments in minutes that would otherwise require extensive PowerShell scripting or many hours of manual configuration. With little or no Azure experience, you can provision a standardized base environment for hands-on learning or to pilot integrated solutions.
+Azure Resource Manager (ARM)) templates are pre-configured prescriptive deployment packages that enable you to provision complex test/pilot environments in minutes that would otherwise require extensive PowerShell scripting or many hours of manual configuration. With little or no Azure experience, you can provision a standardized base environment for hands-on learning or to pilot integrated solutions.
 
 ## Templates
 
