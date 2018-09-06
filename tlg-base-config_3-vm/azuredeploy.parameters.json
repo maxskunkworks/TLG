@@ -3,28 +3,37 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "configName": {
-      "value": "GEN-UNIQUE"
+      "value": "TlgBaseConfig-01"
     },
     "domainName": {
       "value": "corp.contoso.com"
     },
+    "serverOS": {
+      "value": "2016-Datacenter"
+    },
     "adminUsername": {
-      "value": "GEN-UNIQUE-8"
+      "value": ""
     },
     "adminPassword": {
-      "value": "GEN-PASSWORD"
+      "value": ""
+    },
+    "deployClientVM": {
+      "value": "yes"
+    },
+    "clientVhdUri": {
+      "value": "yes"
     },
     "vmSize": {
       "value": "Standard_DS2_v2"
     },
     "dnsLabelPrefix": {
-      "value": "GEN-UNIQUE-13"
+      "value": ""
     },
-    "deployClientVm": {
-      "value": "Yes"
+    "_artifactsLocation": {
+      "value": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm"
     },
-    "clientVhdUri": {
-      "value": "GEN-GENERALIZED-WINVHD-URI"
+    "_artifactsLocation": {
+      "value": ""
     }
   }
 }
