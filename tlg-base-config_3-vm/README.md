@@ -69,8 +69,8 @@ the JoinDomain extensions for the member VMs. This asymmetric VM deployment proc
 
 `Tags: TLG, Test Lab Guide, Base Configuration`
 ___
-Developed by the **MAX Skunkworks Lab**  
-Author: Kelley Vice (kvice@microsoft.com)  
+Developed by the **MAX Skunkworks Lab**
+
 https://github.com/maxskunkworks
 
-![alt text](images/maxskunkworkslogo-small.jpg "MAX Skunkworks")
+![MAX Skunkworks logo](https://github.com/oualabadmins/lab_deploy/blob/master/common/images/maxskunkworkslogo-small.jpg "MAX Skunkworks")

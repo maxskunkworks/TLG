@@ -15,6 +15,7 @@ All code in this repo is public (read-only to non-contributors). All templates i
 
 ___
 Developed by the **MAX Skunkworks Lab**
+
 https://github.com/maxskunkworks
 
 ![MAX Skunkworks logo](https://github.com/oualabadmins/lab_deploy/blob/master/common/images/maxskunkworkslogo-small.jpg "MAX Skunkworks")
