@@ -17,6 +17,10 @@ The **Simulated intranet for Microsoft 365 Test Lab Guides** template provisions
 
 ![alt text](images/tlg-m365.png "Diagram of the base config deployment")
 
+**Note:** You can choose to deploy the client VM with either Windows Server 2016 Datacenter (the default choice), or Windows 10 Pro if your Azure subscription is eligible for access to Windows 10 gallery images.
+
+* For more information about eligible subscriptions, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/client-images#subscription-eligibility.
+
 ## Usage
 
 You can deploy this template in one of two ways:
