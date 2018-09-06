@@ -26,6 +26,16 @@
       },
       "defaultValue": "2016-Datacenter"
     },
+    "clientOS": {
+      "type": "string",
+      "allowedValues": [
+        "Windows Server 2016", "Windows 10"
+      ],
+      "metadata": {
+        "description": "The OS of client VMs in your deployment. You can choose Windows 10 ONLY if your Azure subscription supports Windows 10 gallery images. See the README for more details."
+      },
+      "defaultValue": "Windows Server 2016"
+    },
     "adminUsername": {
       "type": "string",
       "metadata": {
@@ -409,6 +419,9 @@
           },
           "nicName": {
             "value": "[concat(parameters('configName'),'-CLI_NIC')]"
+          },
+          "clientOS": {
+            "value": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'2016-Datacenter','rs4-pro')]"
           }
         }
       }

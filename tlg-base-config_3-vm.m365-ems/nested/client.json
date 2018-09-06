@@ -10,6 +10,9 @@
     },
     "nicName": {
       "type": "string"
+    },
+    "clientOS": {
+      "type": "string"
     }
   },
   "variables": {},
@@ -31,9 +34,9 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "MicrosoftWindowsServer",
-            "offer": "WindowsServer",
-            "sku": "[parameters('SharedVmConfig').serverOS]",
+            "publisher": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'MicrosoftWindowsServer','MicrosoftWindowsDesktop')]",
+            "offer": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'WindowsServer','Windows-10')]",
+            "sku": "[parameters('clientOS')]",
             "version": "latest"
           },
           "osDisk": {
