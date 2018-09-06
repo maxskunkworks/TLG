@@ -19,8 +19,6 @@ $domainName = "" # The FQDN of the new AD domain.
 $serverOS = "2016-Datacenter" # The OS of application servers in your deployment, i.e. 2016-Datacenter or 2012-R2-Datacenter.
 $adminUserName = "" # The name of the domain administrator account to create, i.e. globaladmin.
 $adminPassword = "" # The administrator account password.
-$deployClientVm = "Yes" # Yes or No
-$clientVhdUri = "" # The URI of the storage account containing the client VHD. Leave blank if you are not deploying a client VM.
 $vmSize = "Standard_DS2_v2" # Select a VM size for all server VMs in your deployment.
 $dnsLabelPrefix = "" # DNS label prefix for public IPs. Must be lowercase and match the regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$.
 $_artifactsLocation = "https://raw.githubusercontent.com/oualabadmins/lab_deploy/master/tlg-base-config_3-vm" # Location of template artifacts.
@@ -34,8 +32,6 @@ $parameters.Add("domainName",$domainName)
 $parameters.Add("serverOS",$serverOS)
 $parameters.Add("adminUserName",$adminUserName)
 $parameters.Add("adminPassword",$adminPassword)
-$parameters.Add("deployClientVm",$deployClientVm)
-$parameters.Add("clientVhdUri",$clientVhdUri)
 $parameters.Add("vmSize",$vmSize)
 $parameters.Add("dnsLabelPrefix",$dnsLabelPrefix)
 $parameters.Add("_artifactsLocation",$_artifactsLocation)

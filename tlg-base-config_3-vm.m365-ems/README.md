@@ -1,8 +1,8 @@
-﻿# TLG (Test Lab Guide) - Microsoft 365 + EMS (v1.0)
+﻿# Simulated intranet for Microsoft 365 Test Lab Guides (v1.0)
 
-**Time to deploy**: Approx. 40 minutes
+**Time to deploy**: Approx. 32 minutes
 
-Last updated _8/30/2018_
+Last updated _9/6/2018_
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmaxskunkworks%2Ftlg%2Fmaster%2Ftlg-base-config_3-vm.m365-ems%2Fazuredeploy.json" target="_blank">
 <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -11,18 +11,26 @@ Last updated _8/30/2018_
 <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
+<<<<<<< HEAD
 This template deploys the **TLG (Test Lab Guide) - Microsoft 365 + EMS**, a Test Lab Guide (TLG) configuration that represents a simplified intranet connected to the Internet and integrated with Microsoft 365 with EMS. This template corresponds to the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide. After you deploy this template, you will need to complete the steps in [Phase 4](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise#phase-4-create-your-office-365-e5-and-ems-e5-subscriptions) in the linked article to complete the configuration.
 
 The **Microsoft 365 + EMS** template provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and a client VM running Windows Server 2016. You can use the resulting environment to test the features and functionality of Microsoft 365 Enterprise, with additional Microsoft 365 Enterprise [Test Lab Guides](http://aka.ms/catlgs) or on your own.
+=======
+This template deploys the **Simulated intranet for Microsoft 365 Test Lab Guides** base configuration that represents a a simplified environment for Microsoft 365 Enterprise scenarios. This template corresponds to the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide.
 
-![alt text](images/tlg-base-config_3-vm.m365-ems.png "Diagram of the base config deployment")
+The **Simulated intranet for Microsoft 365 Test Lab Guides** template provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and a client VM running Windows Server 2016. You can use the resulting environment to test the features and functionality of Microsoft 365 Enterprise, with additional Microsoft 365 Enterprise [Test Lab Guides](http://aka.ms/m365etlgs) or on your own.
+>>>>>>> master
+
+![alt text](images/tlg-m365.png "Diagram of the base config deployment")
 
 ## Usage
 
 You can deploy this template in one of two ways:
 
-+ Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
++ Click the **Deploy to Azure** button to open the deployment UI in the Azure portal
 + Execute the PowerShell script at https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems/scripts/Deploy-TLG.ps1 on your local computer.
+
+After you deploy the template, you will need to complete the steps in [Phase 4](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise#phase-4-create-your-office-365-e5-and-ems-e5-subscriptions) in the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide article to complete the configuration.
 
 ## Solution overview and deployed resources
 
@@ -42,17 +50,14 @@ The following resources are deployed as part of the solution:
 
 ## Solution notes
 
-* All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip.
-* The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter.
-* The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of 
-the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several minutes to the overall deployment time.
-* The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs.
-* The default VM size for all VMs in the deployment is Standard_D2_v2. See the **Known Issues** section below for information about possible issues related to client VM size.
-* Deployment outputs include public IP address and FQDN for each VM.
++ All guest OS configuration is executed with DSC, using the resources CreateADPDC.ps1.zip and AppConfig.ps1.zip.
++ The domain user *User1* is created in the domain and added to the Domain Admins group. User1's password is the one you provide in the *adminPassword* parameter.
++ The *App server* and *Client* VM resources depend on the **ADDC** resource deployment in order to ensure that the AD domain exists prior to execution of the JoinDomain extensions for the member VMs. This asymmetric VM deployment process adds several minutes to the overall deployment time.
++ The private IP address of the **ADDC** VM is always *10.0.0.10*. This IP is set as the DNS IP for the virtual network and all member NICs.
++ The default VM size for all VMs in the deployment is Standard_D2_v2.
++ Deployment outputs include public IP address and FQDN for each VM.
 
-## Known issues
-
-`Tags: TLG, Test Lab Guide, Base Configuration`
+`Tags: TLG, Test Lab Guide, Base Configuration, M365, Microsoft 365`
 ___
 Developed by the **MAX Skunkworks Lab**  
 Author: Kelley Vice (kvice@microsoft.com)  

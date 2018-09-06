@@ -10,39 +10,16 @@
     },
     "nicName": {
       "type": "string"
-    },
-    "vhdUri": {
-      "type": "string"
     }
   },
-  "variables": {
-    "imageName": "[concat(parameters('vmName'),'-image')]"
-  },
+  "variables": {},
   "resources": [
-    {
-      "type": "Microsoft.Compute/images",
-      "apiVersion": "2017-03-30",
-      "name": "[variables('ImageName')]",
-      "location": "[parameters('SharedVmConfig').location]",
-      "properties": {
-        "storageProfile": {
-          "osDisk": {
-            "osType": "Windows",
-            "osState": "Generalized",
-            "blobUri": "[concat(parameters('vhdUri'))]",
-            "storageAccountType": "Standard_LRS"
-          }
-        }
-      }
-    },
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines",
       "name": "[parameters('vmName')]",
       "location": "[parameters('SharedVmConfig').location]",
-      "dependsOn": [
-        "[variables('ImageName')]"
-      ],
+      "dependsOn": [],
       "properties": {
         "hardwareProfile": {
           "vmSize": "[parameters('SharedVmConfig').vmSize]"
@@ -54,8 +31,21 @@
         },
         "storageProfile": {
           "imageReference": {
-            "id": "[resourceId('Microsoft.Compute/images/',variables('ImageName'))]"
-          }
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "[parameters('SharedVmConfig').serverOS]",
+            "version": "latest"
+          },
+          "osDisk": {
+            "createOption": "FromImage"
+          },
+          "dataDisks": [
+            {
+              "createOption": "Empty",
+              "diskSizeGB": 1023,
+              "lun": 0
+            }
+          ]
         },
         "networkProfile": {
           "networkInterfaces": [

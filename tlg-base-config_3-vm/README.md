@@ -11,9 +11,9 @@ Last updated _7/24/2018_
 <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template deploys the **TLG (Test Lab Guide) 3 VM Base Configuration**, a Test Lab Guide (TLG) configuration that represents a simplified intranet connected to the Internet. This base configuration is the starting point for additional TLGs that can be found [here](http://aka.ms/catlgs).
+This template deploys the **3 VM Base Configuration**, a base configuration that represents a simplified intranet connected to the Internet. This base configuration is the starting point for additional TLGs that can be found [here](http://aka.ms/catlgs).
 
-The **TLG (Test Lab Guide) 3 VM Base Configuration** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and optionally a client VM running Windows 10. 
+The **3 VM Base Configuration** provisions a Windows Server 2012 R2 or 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2012 R2 or 2016, and optionally a client VM running Windows 10.
 
 ![alt text](images/tlg-base-config_3-vm.png "Diagram of the base config deployment")
 
@@ -31,9 +31,6 @@ You can deploy this template in one of two ways:
 
 + Click the "Deploy to Azure" button to open the deployment UI in the Azure portal
 + Execute the PowerShell script at https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm/scripts/Deploy-TLG.ps1 on your local computer.
-
-## Credits
-Thanks to both Simon Davies and Willem Kasdorp, from whom I borrowed various DSC configuration elements.
 
 ## Solution overview and deployed resources
 
