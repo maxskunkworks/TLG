@@ -28,6 +28,11 @@ You can deploy this template in one of two ways:
 + Click the **Deploy to Azure** button to open the deployment UI in the Azure portal
 + Execute the PowerShell script at https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems/scripts/Deploy-TLG.ps1 on your local computer.
 
+Prior to deploying the template, have the following information ready:
+
++ The public DNS domain name of your test environment (testlab.\<_your public domain_\>). Enter this name in the __Domain Name__ field after clicking the __Deploy to Azure__ button or for the value of the __domainName__ variable in the template parameters file.
++ A DNS label prefix for the public hostname of your virtual machines, which are generated during the deployment in the format _\<DNS label prefix\>\<VM hostname\>.\<region\>.cloudapp.azure.com_. Enter this label in the __Dns Label Prefix__ field after clicking the __Deploy to Azure__ button or for the value of the __dnsLabelPrefix__ variable in the template parameters file.
+
 After you deploy the template, you will need to complete the steps in [Phase 4](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise#phase-4-create-your-office-365-e5-and-ems-e5-subscriptions) in the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide article to complete the configuration.
 
 ## Solution overview and deployed resources
