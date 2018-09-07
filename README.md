@@ -1,5 +1,7 @@
 # Test Lab Guide (TLG) ARM Template Repository
 
+![TLG logo](https://github.com/oualabadmins/lab_deploy/blob/master/common/images/tlg.png "MAX Skunkworks")
+
 The TLG repository contains ARM templates used to deploy Test Lab Guide (TLG) environments. TLGs help you quickly learn about Microsoft products. They're great for situations where you need to evaluate a technology or configuration before you decide whether it's right for you or before you roll it out to users. The "I built it out myself and it works" hands-on experience helps you understand the deployment requirements of a new product or solution so you can better plan for hosting it in production. You can learn more about TLGs [here](http://aka.ms/catlgs).
 
 Azure Resource Manager (ARM) templates are pre-configured prescriptive deployment packages that enable you to provision complex test/pilot environments in minutes that would otherwise require extensive PowerShell scripting or many hours of manual configuration. With little or no Azure experience, you can provision a standardized base environment for hands-on learning or to pilot integrated solutions.
