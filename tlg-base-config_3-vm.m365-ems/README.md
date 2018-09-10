@@ -41,13 +41,13 @@ After you deploy the template, you will need to complete the steps in **Phase 2*
 
 The following resources are deployed as part of the solution:
 
-+ **ADDC VM**: Windows Server 2012 R2 or 2016 VM configured as a domain controller and DNS with static private IP address
-+ **App Server VM**: Windows Server 2012 R2 or 2016 VM joined to the domain. IIS and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account.
-+ **Client VM**: Windows Server 2016 client joined to the domain
++ **ADDC VM**: Windows Server 2016 VM configured as a domain controller and DNS with static private IP address.
++ **App Server VM**: Windows Server 2016 VM joined to the domain. IIS and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account.
++ **Client VM**: Windows Server 2016 or Windows 10 Pro client joined to the domain.
 + **Storage account**: Diagnostics storage account, and client VM storage account if indicated. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
-+ **NSG**: Network security group configured to allow inbound RDP on 3389
++ **NSG**: Network security group configured to allow inbound RDP on 3389.
 + **Virtual network**: Virtual network for internal traffic, configured with custom DNS pointing to the ADDC's private IP address and tenant subnet 10.0.0.0/8 for a total of 16,777,214 available IP addresses.
-+ **Network interfaces**: 1 NIC per VM
++ **Network interfaces**: 1 NIC per VM.
 + **Public IP addresses**: 1 static public IP per VM. Note that some subscriptions may have limits on the number of static IPs that can be deployed for a given region.
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain.
 + **BGInfo**: The **BGInfo** extension is applied to all VMs.
