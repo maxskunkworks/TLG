@@ -2,7 +2,7 @@
 
 **Time to deploy**: Approx. 32-40 minutes
 
-Last updated _9/10/2018_
+Last updated _9/11/2018_
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmaxskunkworks%2Ftlg%2Fmaster%2Ftlg-base-config_3-vm.m365-ems%2Fazuredeploy.json" target="_blank">
 <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -35,7 +35,7 @@ Prior to deploying the template, have the following information ready:
 
 **Note:** The simulated intranet built by the ARM template requires a paid Azure subscription.
 
-After you deploy the template, you will need to complete the steps in **Phase 2** in the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide article to complete the configuration.
+After you deploy the template, you will need to complete the steps in [**Phase 2**](https://docs.microsoft.com/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise#phase-2-create-your-office-365-e5-and-ems-e5-subscriptions) in the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide article to complete the configuration.
 
 ## Solution overview and deployed resources
 
