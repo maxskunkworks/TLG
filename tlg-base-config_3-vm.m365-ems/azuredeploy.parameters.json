@@ -9,10 +9,10 @@
       "value": "testlab.corp.contoso.com"
     },
     "serverOS": {
-      "value": "2016-Datacenter"
+      "value": "Windows Server 2016"
     },
     "clientOS": {
-      "value": "2016-Datacenter"
+      "value": "Windows Server 2016"
     },
     "adminUsername": {
       "value": ""
@@ -29,7 +29,7 @@
     "_artifactsLocation": {
       "value": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems"
     },
-    "_artifactsLocation": {
+    "_artifactsLocationSasToken": {
       "value": ""
     }
   }
