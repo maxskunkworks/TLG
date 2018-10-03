@@ -19,7 +19,9 @@
     }
   },
   "variables": {
-    "firstExtensionName": "[concat(parameters('vmName'),'/JoinDomain')]"
+    "firstExtensionSuffix": "/JoinDomain",
+    "firstExtensionName": "[concat(parameters('vmName'),variables('firstExtensionSuffix'))]",
+    "firstExtensionId": "[concat(parameters('vmName'),'/extensions',variables('firstExtensionSuffix'))]"
   },
   "resources": [
     {
@@ -103,7 +105,8 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]"
+        "[parameters('vmName')]",
+        "[resourceId('Microsoft.Compute/virtualMachines',variables('firstExtensionId'))]"
       ],
       "properties": {
         "publisher": "Microsoft.Powershell",
@@ -132,7 +135,8 @@
       "scale": null,
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]"
+        "[parameters('vmName')]",
+        "[resourceId('Microsoft.Compute/virtualMachines',variables('firstExtensionId'))]"
       ],
       "properties": {
 
@@ -153,7 +157,8 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]"
+        "[parameters('vmName')]",
+        "[resourceId('Microsoft.Compute/virtualMachines',variables('firstExtensionId'))]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
