@@ -82,4 +82,4 @@ https://github.com/maxskunkworks
 ## Changelog
 
 + **9/10/2018**: Original commit
-+ **10/3/2018**: Updated to use friendly OS names
++ **10/3/2018**: Updated to use friendly OS names, added extension dependencies to prevent final extensions from attempting to deploy during system reboot
