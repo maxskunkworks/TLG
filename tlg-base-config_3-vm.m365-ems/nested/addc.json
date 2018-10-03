@@ -113,7 +113,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[variables('firstExtensionName')]"
+        "[resourceId('Microsoft.Compute/virtualMachines/extensions', variables('firstExtensionName'))]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -132,7 +132,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[variables('firstExtensionName')]"
+        "[resourceId('Microsoft.Compute/virtualMachines/extensions', variables('firstExtensionName'))]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
