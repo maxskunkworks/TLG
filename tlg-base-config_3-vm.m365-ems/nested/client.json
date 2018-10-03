@@ -99,8 +99,7 @@
       "scale": null,
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'),'extensions/JoinDomain')]"
+        "[parameters('vmName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -118,8 +117,7 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'),'extensions/JoinDomain')]"
+        "[parameters('vmName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
