@@ -1,8 +1,8 @@
-﻿# Simulated intranet for Microsoft 365 Test Lab Guides (v1.0)
+﻿# Simulated intranet for Microsoft 365 Test Lab Guides (v1.1)
 
 **Time to deploy**: Approx. 32-40 minutes
 
-Last updated _9/11/2018_
+Last updated _10/3/2018_
 
 <a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmaxskunkworks%2Ftlg%2Fmaster%2Ftlg-base-config_3-vm.m365-ems%2Fazuredeploy.json" target="_blank">
 <img src="http://azuredeploy.net/deploybutton.png"/>
@@ -17,7 +17,7 @@ The **Simulated intranet for Microsoft 365 Test Lab Guides** template provisions
 
 ![alt text](images/tlg-m365.png "Diagram of the base config deployment")
 
-**Note:** You can choose to deploy the client VM with either Windows Server 2016 Datacenter (the default choice), or Windows 10 Pro if your Azure subscription is eligible for access to Windows 10 gallery images.
+**Note:** You can choose to deploy the client VM with either _Windows Server 2016 Datacenter_ (the default choice), or _Windows 10 Pro_ if your Azure subscription is eligible for access to Windows 10 gallery images. The deployment will fail if you choose _Windows 10_ without an eligible subscription.
 
 * For more information about eligible subscriptions, see https://docs.microsoft.com/en-us/azure/virtual-machines/windows/client-images#subscription-eligibility.
 
@@ -41,14 +41,25 @@ After you deploy the template, you will need to complete the steps in [**Phase 2
 
 The following resources are deployed as part of the solution:
 
-+ **ADDC VM**: Windows Server 2016 VM configured as a domain controller and DNS with static private IP address.
-+ **App Server VM**: Windows Server 2016 VM joined to the domain. IIS and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account.
-+ **Client VM**: Windows Server 2016 or Windows 10 Pro client joined to the domain.
+### VMs
+
++ **ADDC VM**: Windows Server 2012 R2 Datacenter or Windows Server 2016 Datacenter VM configured as a domain controller and DNS with static private IP address
++ **App Server VM**: Windows Server 2012 R2 Datacenter or Windows Server 2016 Datacenter VM joined to the domain. IIS and .NET 4.5 are installed, and the directory C:\Files containing the file example.txt is shared as "\\APP1\Files" with full control for the User1 domain account.
++ **Client VM**: Windows Server 2016 Datacenter or Windows 10 Pro client joined to the domain
+
+### Storage
+
 + **Storage account**: Diagnostics storage account, and client VM storage account if indicated. ADDC and App Server VMs in the deployment use managed disks, so no storage accounts are created for VHDs.
-+ **NSG**: Network security group configured to allow inbound RDP on 3389.
+
+### Networking
+
++ **NSG**: Network security group configured to allow inbound RDP on 3389
 + **Virtual network**: Virtual network for internal traffic, configured with custom DNS pointing to the ADDC's private IP address and tenant subnet 10.0.0.0/8 for a total of 16,777,214 available IP addresses.
 + **Network interfaces**: 1 NIC per VM.
 + **Public IP addresses**: 1 static public IP per VM. Note that some subscriptions may have limits on the number of static IPs that can be deployed for a given region.
+
+### Extensions
+
 + **JoinDomain**: Each member VM uses the **JsonADDomainExtension** extension to join the domain.
 + **BGInfo**: The **BGInfo** extension is applied to all VMs.
 + **Antimalware**: The **iaaSAntimalware** extension is applied to all VMs with basic scheduled scan and exclusion settings.
@@ -69,3 +80,8 @@ Developed by the **MAX Skunkworks Lab**
 https://github.com/maxskunkworks
 
 ![MAX Skunkworks logo](https://github.com/oualabadmins/lab_deploy/blob/master/common/images/maxskunkworkslogo-small.jpg "MAX Skunkworks")
+
+## Changelog
+
++ **9/10/2018**: Original commit
++ **10/3/2018**: Updated to use friendly OS names, added extension dependencies to prevent final extensions from attempting to deploy during system reboot

@@ -10,9 +10,6 @@
     },
     "nicName": {
       "type": "string"
-    },
-    "clientOS": {
-      "type": "string"
     }
   },
   "variables": {},
@@ -34,9 +31,9 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'MicrosoftWindowsServer','MicrosoftWindowsDesktop')]",
-            "offer": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'WindowsServer','Windows-10')]",
-            "sku": "[parameters('clientOS')]",
+            "publisher": "[if(equals(parameters('SharedVmConfig').clientOS,'2016-Datacenter'),'MicrosoftWindowsServer','MicrosoftWindowsDesktop')]",
+            "offer": "[if(equals(parameters('SharedVmConfig').clientOS,'2016-Datacenter'),'WindowsServer','Windows-10')]",
+            "sku": "[parameters('SharedVmConfig').clientOS]",
             "version": "latest"
           },
           "osDisk": {
@@ -100,7 +97,8 @@
       "scale": null,
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]"
+        "[parameters('vmName')]",
+        "[concat(parameters('vmName'),'/JoinDomain')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -118,7 +116,8 @@
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
-        "[parameters('vmName')]"
+        "[parameters('vmName')]",
+        "[concat(parameters('vmName'),'/JoinDomain')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",

@@ -8,6 +8,7 @@
     Install-Module AzureRM
 
     9/6/2018 - Updated params to match azuredeploy.json
+    10/3/2018 - Updated param values and notes to match main template
 
 #>
 
@@ -18,7 +19,7 @@ $location = "location, i.e. West US"
 
 $configName = "" # The name of the deployment, i.e. BaseConfig01. Do not use spaces or special characters other than _ or -. Used to concatenate resource names for the deployment.
 $domainName = "" # The FQDN of the new AD domain.
-$serverOS = "2016-Datacenter" # The OS of server VMs in your deployment, i.e. 2016-Datacenter or 2012-R2-Datacenter.
+$serverOS = "Windows Server 2016" # The OS of server VMs in your deployment, i.e. Windows Server 2016 or Windows Server 2012 R2.
 $clientOS = "Windows Server 2016" # The OS of client VMs in your deployment, i.e. Windows Server 2016 or Windows 10.
 $adminUserName = "" # The name of the domain administrator account to create, i.e. globaladmin.
 $adminPassword = "" # The administrator account password.
