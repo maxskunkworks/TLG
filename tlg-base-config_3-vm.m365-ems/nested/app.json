@@ -104,7 +104,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines/extensions/', variables('firstExtensionName'))]"
+        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'),'extensions/JoinDomain')]"
       ],
       "properties": {
         "publisher": "Microsoft.Powershell",
@@ -134,7 +134,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines/extensions/', variables('firstExtensionName'))]"
+        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'),'extensions/JoinDomain')]"
       ],
       "properties": {
 
@@ -156,7 +156,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines/extensions/', variables('firstExtensionName'))]"
+        "[resourceId('Microsoft.Compute/virtualMachines', parameters('vmName'),'extensions/JoinDomain')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
