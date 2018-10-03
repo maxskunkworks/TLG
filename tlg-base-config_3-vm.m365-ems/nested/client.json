@@ -102,7 +102,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines',parameters('vmName'),'extensions','JoinDomain')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'/extensions/JoinDomain')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -121,7 +121,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines',parameters('vmName'),'extensions','JoinDomain')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'/extensions/JoinDomain')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",

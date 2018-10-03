@@ -115,7 +115,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines',parameters('vmName'),'extensions','InstallDomainController')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'/extensions/InstallDomainController')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -134,7 +134,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[resourceId('Microsoft.Compute/virtualMachines',parameters('vmName'),'extensions','InstallDomainController')]"
+        "[concat('Microsoft.Compute/virtualMachines/',parameters('vmName'),'/extensions/InstallDomainController')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
