@@ -19,12 +19,12 @@
     "serverOS": {
       "type": "string",
       "allowedValues": [
-        "2012-R2-Datacenter", "2016-Datacenter"
+        "Windows Server 2016", "Windows Server 2012 R2"
       ],
       "metadata": {
         "description": "The OS of application servers in your deployment."
       },
-      "defaultValue": "2016-Datacenter"
+      "defaultValue": "Windows Server 2016"
     },
     "clientOS": {
       "type": "string",
@@ -109,13 +109,17 @@
 
       "cliVmName": "CLIENT1",
       "clientNicIP": "10.0.0.12",
-      "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]"
+      "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]",
+
+      "clientOS": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'2016-Datacenter','rs4-pro')]",
+      "serverOS": "[if(equals(parameters('serverOS'),'Windows Server 2016'),'2016-Datacenter','2012-R2-Datacenter')]"
     },
 
     "SharedVmConfig": {
       "location": "[resourceGroup().location]",
       "vmSize": "[parameters('vmSize')]",
-      "serverOS": "[parameters('serverOS')]",
+      "clientOS": "[variables('VMs').clientOS]",
+      "serverOS": "[variables('VMs').serverOS]",
       "domainUsername": "[variables('domainUsername')]",
       "adminUsername": "[parameters('adminUsername')]",
       "adminPassword": "[parameters('adminPassword')]",
@@ -419,9 +423,6 @@
           },
           "nicName": {
             "value": "[concat(parameters('configName'),'-CLI_NIC')]"
-          },
-          "clientOS": {
-            "value": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'2016-Datacenter','rs4-pro')]"
           }
         }
       }
