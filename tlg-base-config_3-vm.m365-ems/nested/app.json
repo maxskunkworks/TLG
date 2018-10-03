@@ -18,7 +18,9 @@
       "type": "object"
     }
   },
-  "variables": {},
+  "variables": {
+    "firstExtensionName": "[concat(parameters('vmName'),'/JoinDomain')]"
+  },
   "resources": [
     {
       "apiVersion": "2017-03-30",
@@ -70,7 +72,7 @@
     {
       "apiVersion": "2017-03-30",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/JoinDomain')]",
+      "name": "[variables('firstExtensionName')]",
       "location": "[parameters('SharedVmConfig').location]",
       "tags": {
         "displayName": "Join Domain"
@@ -102,7 +104,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[concat(parameters('vmName'),'/JoinDomain')]"
+        "[variables('firstExtensionName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Powershell",
@@ -132,7 +134,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[concat(parameters('vmName'),'/JoinDomain')]"
+        "[variables('firstExtensionName')]"
       ],
       "properties": {
 
@@ -154,7 +156,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[concat(parameters('vmName'),'/JoinDomain')]"
+        "[variables('firstExtensionName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",

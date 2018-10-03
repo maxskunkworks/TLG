@@ -18,7 +18,10 @@
       "type": "object"
     }
   },
-  "variables": {},
+  "variables": {
+    "firstExtensionName": "[concat(parameters('vmName'),'/InstallDomainController')]"
+
+  },
   "resources": [
     {
       "apiVersion": "2017-03-30",
@@ -70,7 +73,7 @@
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "name": "[concat(parameters('vmName'),'/InstallDomainController')]",
+      "name": "[variables('firstExtensionName')]",
       "apiVersion": "2017-03-30",
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
@@ -110,7 +113,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[concat(parameters('vmName'),'/InstallDomainController')]"
+        "[variables('firstExtensionName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Compute",
@@ -129,7 +132,7 @@
       "location": "[parameters('SharedVmConfig').location]",
       "dependsOn": [
         "[parameters('vmName')]",
-        "[concat(parameters('vmName'),'/InstallDomainController')]"
+        "[variables('firstExtensionName')]"
       ],
       "properties": {
         "publisher": "Microsoft.Azure.Security",
