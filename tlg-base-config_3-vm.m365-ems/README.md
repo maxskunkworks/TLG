@@ -75,11 +75,9 @@ The following resources are deployed as part of the solution:
 
 `Tags: TLG, Test Lab Guide, Base Configuration, M365, Microsoft 365`
 ___
-Developed by the **MAX Skunkworks Lab**
+Developed by the **Office 365 Commercial Content Experience team**
 
-https://github.com/maxskunkworks
-
-![MAX Skunkworks logo](https://github.com/oualabadmins/lab_deploy/blob/master/common/images/maxskunkworkslogo-small.jpg "MAX Skunkworks")
+Last update: _11/12/2018_
 
 ## Changelog
 

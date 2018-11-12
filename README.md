@@ -40,10 +40,6 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 ___
-Developed by the **MAX Skunkworks Lab**
+Developed by the **Office 365 Commercial Content Experience team**
 
-https://github.com/maxskunkworks
-
-![MAX Skunkworks logo](https://github.com/oualabadmins/lab_deploy/blob/master/common/images/maxskunkworkslogo-small.jpg "MAX Skunkworks")
-
-Last update: _10/25/2018_
+Last update: _11/12/2018_
