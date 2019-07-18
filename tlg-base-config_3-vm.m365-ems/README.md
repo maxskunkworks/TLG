@@ -11,7 +11,7 @@ Last updated _10/3/2018_
 <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-This template deploys the **Simulated intranet for Microsoft 365 Test Lab Guides** base configuration that represents a a simplified environment for Microsoft 365 Enterprise scenarios. This template corresponds to the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide.
+This template deploys the **Simulated intranet for Microsoft 365 Test Lab Guides** base configuration that represents a simplified environment for Microsoft 365 Enterprise scenarios. This template corresponds to the [Simulated Enterprise Base Configuration](https://docs.microsoft.com/en-us/microsoft-365/enterprise/simulated-ent-base-configuration-microsoft-365-enterprise) Test Lab Guide.
 
 The **Simulated intranet for Microsoft 365 Test Lab Guides** template provisions a Windows Server 2016 Active Directory domain controller using the specified domain name, an application server running Windows Server 2016, and a client VM running Windows Server 2016 or Windows 10 Pro. You can use the resulting environment to test the features and functionality of Microsoft 365 Enterprise, with additional [Test Lab Guides](http://aka.ms/m365etlgs) or on your own.
 
