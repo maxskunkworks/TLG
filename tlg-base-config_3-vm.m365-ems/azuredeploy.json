@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "configName": {
@@ -19,22 +19,22 @@
     "serverOS": {
       "type": "string",
       "allowedValues": [
-        "Windows Server 2016", "Windows Server 2012 R2"
+        "Windows Server 2022", "Windows Server 2019"
       ],
       "metadata": {
         "description": "The OS of application servers in your deployment."
       },
-      "defaultValue": "Windows Server 2016"
+      "defaultValue": "Windows Server 2022"
     },
     "clientOS": {
       "type": "string",
       "allowedValues": [
-        "Windows Server 2016", "Windows 10"
+        "Windows 11", "Windows 10"
       ],
       "metadata": {
-        "description": "The OS of client VMs in your deployment. You can choose Windows 10 ONLY if your Azure subscription supports Windows 10 gallery images. See the README for more details."
+        "description": "The OS of client VMs in your deployment."
       },
-      "defaultValue": "Windows Server 2016"
+      "defaultValue": "Windows 11"
     },
     "adminUsername": {
       "type": "string",
@@ -53,7 +53,7 @@
       "metadata": {
         "description": "Select a VM size for all VMs in your deployment."
       },
-      "defaultValue": "Standard_DS2_v2"
+      "defaultValue": "Standard_D2as_v5"
     },
     "dnsLabelPrefix": {
       "type": "string",
@@ -88,7 +88,7 @@
     "network": {
       "vnetName": "[concat(parameters('configName'),'-VNET')]",
       "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', concat(parameters('configName'),'-VNET'), 'subnet-01')]",
-      "subnet": "10.0.0.0/8",
+      "subnet": "10.0.0.0/16",
       "nsgName": "[concat(parameters('configName'),'-NSG')]"
     },
 
@@ -111,8 +111,8 @@
       "clientNicIP": "10.0.0.12",
       "cliPublicIpName": "[concat(parameters('configName'),'-CLI_IP')]",
 
-      "clientOS": "[if(equals(parameters('clientOS'),'Windows Server 2016'),'2016-Datacenter','rs4-pro')]",
-      "serverOS": "[if(equals(parameters('serverOS'),'Windows Server 2016'),'2016-Datacenter','2012-R2-Datacenter')]"
+      "clientOS": "[if(equals(parameters('clientOS'),'Windows 11'),'win11-21h2-ent','win10-21h2-ent-g2')]",
+      "serverOS": "[if(equals(parameters('serverOS'),'Windows Server 2022'),'2022-datacenter-g2','2019-datacenter-gensecond')]"
     },
 
     "SharedVmConfig": {
@@ -347,8 +347,8 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "SharedVmConfig": { 
-            "value": "[variables('SharedVmConfig')]" 
+          "SharedVmConfig": {
+            "value": "[variables('SharedVmConfig')]"
           },
           "vmName": {
             "value": "[variables('VMs').adVmName]"
@@ -381,8 +381,8 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "SharedVmConfig": { 
-            "value": "[variables('SharedVmConfig')]" 
+          "SharedVmConfig": {
+            "value": "[variables('SharedVmConfig')]"
           },
           "vmName": {
             "value": "[variables('VMs').appVmName]"
@@ -415,8 +415,8 @@
           "contentVersion": "1.0.0.0"
         },
         "parameters": {
-          "SharedVmConfig": { 
-            "value": "[variables('SharedVmConfig')]" 
+          "SharedVmConfig": {
+            "value": "[variables('SharedVmConfig')]"
           },
           "vmName": {
             "value": "[variables('VMs').cliVmName]"

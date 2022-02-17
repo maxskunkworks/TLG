@@ -35,8 +35,8 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "[if(equals(parameters('SharedVmConfig').clientOS,'2016-Datacenter'),'MicrosoftWindowsServer','MicrosoftWindowsDesktop')]",
-            "offer": "[if(equals(parameters('SharedVmConfig').clientOS,'2016-Datacenter'),'WindowsServer','Windows-10')]",
+            "publisher": "MicrosoftWindowsDesktop",
+            "offer": "[if(equals(parameters('SharedVmConfig').clientOS,'win11-21h2-ent'),'Windows-11','Windows-10')]",
             "sku": "[parameters('SharedVmConfig').clientOS]",
             "version": "latest"
           },
@@ -90,9 +90,7 @@
           "Password": "[parameters('SharedVmConfig').adminPassword]"
         }
       },
-      "dependsOn": [
-        "[parameters('vmName')]"
-      ]
+      "dependsOn": ["[parameters('vmName')]"]
     },
     {
       "type": "Microsoft.Compute/virtualMachines/extensions",

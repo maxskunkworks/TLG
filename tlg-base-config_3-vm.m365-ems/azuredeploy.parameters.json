@@ -6,25 +6,25 @@
       "value": "TlgBaseConfig-01"
     },
     "domainName": {
-      "value": "testlab.corp.contoso.com"
+      "value": "lab.wheatfill.com"
     },
     "serverOS": {
-      "value": "Windows Server 2016"
+      "value": "Windows Server 2022"
     },
     "clientOS": {
-      "value": "Windows Server 2016"
+      "value": "Windows 11"
     },
     "adminUsername": {
-      "value": ""
+      "value": "michaelw"
     },
     "adminPassword": {
-      "value": ""
+      "value": "Cash27261982"
     },
     "vmSize": {
-      "value": "Standard_DS2_v2"
+      "value": "Standard_D2as_v5"
     },
     "dnsLabelPrefix": {
-      "value": ""
+      "value": "wheatfill-lab-"
     },
     "_artifactsLocation": {
       "value": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems"
