@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "configName": {
-      "value": "TlgBaseConfig-01"
+      "value": "TESTLAB"
     },
     "domainName": {
       "value": "lab.wheatfill.com"
@@ -21,13 +21,13 @@
       "value": "Cash27261982"
     },
     "vmSize": {
-      "value": "Standard_D2as_v5"
+      "value": "Standard_B2ms"
     },
     "dnsLabelPrefix": {
       "value": "wheatfill-lab-"
     },
     "_artifactsLocation": {
-      "value": "https://raw.githubusercontent.com/maxskunkworks/tlg/master/tlg-base-config_3-vm.m365-ems"
+      "value": "https://raw.githubusercontent.com/mwheatfill/tlg/master/tlg-base-config_3-vm.m365-ems"
     },
     "_artifactsLocationSasToken": {
       "value": ""
